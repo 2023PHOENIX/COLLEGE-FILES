@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-//aloo mera bhai
+
 using namespace std;
 int check(vector<int> A,int num)
 {
