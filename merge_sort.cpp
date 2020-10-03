@@ -44,7 +44,13 @@ void mergeSort(vector<int> &A, int low, int high)
 int main()
 {
 	
-	vector<int> A{ 1,21,2,89,75,90,43 };
+	vector<int> A;
+	int n;	cin>>n;
+	for(int i=0;i<n;i++)
+	{
+		int data;	cin>>data;
+		A.push_back(data);
+	}
 
 	mergeSort(A, 0, A.size() - 1);
 	for (auto i : A)
