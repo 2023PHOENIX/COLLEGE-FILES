@@ -37,7 +37,14 @@ void quickSort(vector<int>& A, int low, int high)
 }
 int main()
 {
-	vector<int> A{ 1770,21,253,112 };
+	cout <<"Enter your size: " ;
+	int n;	cin>>n;
+	vector<int> A;
+	for(int i=0;i<n;i++)
+	{
+		int d;	cin>>d;
+		A.push_back(d);
+	}
 	quickSort(A, 0, A.size() - 1);
 	for (auto i : A)
 		cout << i << " ";
