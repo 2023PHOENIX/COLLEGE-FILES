@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+class item 
+{
+public:
+    int v;
+    int wt;
+    
+};
+
+int K(vector<item> A,int MW,int n)
+{
+    int Z[MW+1][n+1];
+    memset(Z,-1,sizeof(Z));
+    
+    if(n==0||MW==0)
+        return 0;
+    if(Z[n][MW]!=-1)
+        return Z[n][MW];
+    if(MW >= A.at(n).wt)
+        return Z[n][MW] = max (A.at(n).v + K(A,MW-A.at(n).wt,n-1) , K(A,MW,n-1));
+    
+    else
+        return Z[n][MW] = K(A,MW,n-1);
+}
+
+int main()
+{  
+    vector<item> A;
+    cout << "Enter your total items: ";
+    int n;  cin>>n;
+    for(size_t i=0;i<n;i++)
+    {
+        item it;
+        cout <<"Enter value " <<i <<": ";
+        cin>>it.v;
+        cout <<"Enter weight "<<i <<": ";
+        cin>>it.wt;
+        A.push_back(it);
+    }
+    cout << "Enter Maximum Weight: ";
+    int mx; cin>>mx;
+    
+    cout << K(A,mx,A.size()-1);
+    
+    
+    
+}
