@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+class item
+{
+public:
+    
+    int va; 
+    int wt;
+};
+int k(vector<item> A, int MW)
+{
+    int n= A.size();
+    int Z[n+1][MW+1];
+    
+    for(int i=0;i<=n;i++)
+    {
+        for(int j=0;j<=MW;j++)
+        {
+            if(i==0||j==0)
+                Z[i][j] = 0;
+            else if(A.at(i-1).wt <= MW)
+                Z[i][j] = max( A.at(i-1).va + Z[i-1][j-A.at(i-1).wt] , Z[i-1][j]);
+            else
+                Z[i][j] = Z[i-1][j];
+        }
+    }
+    return Z[n][MW];
+    
+}
+int main()
+{
+    vector<item> A;
+    
+    int n;  cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        item it;
+        cout <<"Enter value "<<i <<":";
+        cin >> it.va;
+        cout <<"Enter weight "<<i<<":";
+        cin >> it.wt;
+        
+        A.push_back(it);
+    }
+    
+    cout <<"Enter total weight of knapsack: ";
+    int MW; cin>>MW;
+    
+    cout << k(A,MW);
+   
+    
+    
+    
+    
+    
+}
