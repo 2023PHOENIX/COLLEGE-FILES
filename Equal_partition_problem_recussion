@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+class item
+{
+public:
+    int vl;
+};
+
+// solving using recursion 
+
+bool knap(vector<item> A,int sum,int n)
+{
+   if(sum==0)
+        return true;        
+    if(n==0)
+        return false;
+    
+    if(sum < A.at(n-1).vl)
+        return  false;  
+    
+    else
+        return knap(A,sum,n-1)||knap(A,sum-A.at(n-1).vl,n-1);
+    
+}
+bool find(vector<item> A,int n)
+{
+    int sum{0};
+    
+    for(auto i : A)
+         sum = sum + i.vl;
+        
+    if(sum%2!=0)
+        return false;
+    else
+        return knap(A,sum/2,n);
+    
+}
+
+int main()
+{
+    vector<item> A;
+    int n;  cin>>n;
+    
+    for(int i=0;i<n;i++)
+    {
+        item z;
+        cin>>z.vl;
+        A.push_back(z);
+    }
+    
+    cout << find(A,A.size());
+}
