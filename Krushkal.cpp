@@ -10,72 +10,79 @@ class Edge
     int source;
     int dest;
     int weight;
-
 };
-
-bool S(Edge a,Edge b)
+bool s(Edge a,Edge b)
 {
   return a.weight < b.weight;
 }
 
-int findParent(int v,int *parent)
+int find_parent(int V,int *parent)
 {
-  if(parent[v] == v)
-    return v;
-  return findParent(parent[v],parent);
+  if(parent[V] == V )
+    return V;
+  return find_parent(parent[V],parent);
 }
-void Kruskals(Edge *input,int n,int E)
+
+void Krushkal(Edge *input,int n,int E)
 {
-  // sort the input array 
-  sort(input,input+E,S);
+  sort(input,input+E,s);
 
-  Edge * output = new Edge[n-1];
 
-  int count{0};
-  int i{0};
-  int *parent = new int[n];
+  Edge* output = new Edge[n-1];
+
+  int* parent = new int[n];
 
 
   for(int i=0;i<n;i++)
-    parent[i] = i;
-
-  while(count<=n-1)
   {
-    Edge currentEdge = input[i];  
-    // check for cycle for current Edge
-  int sourceParent = findParent(currentEdge.source,parent);
-  int destParent = findParent(currentEdge.dest,parent);
-
-  if(sourceParent != destParent)
-      output[count] = currentEdge;
-      count++;
-      parent[sourceParent] = destParent;
-
-   i++;
-  }
- for(int i=0;i<n-1;i++)
-  { 
-    cout<<output[i].source <<" "<<output[i].dest <<" "<<output[i].weight <<"\n";
+    parent[i] = i;
   }
 
+  int c{0},i{0};
+
+  while(c!=n-1)
+  {
+    Edge currentEdge = input[i];
+
+    int sourceParent = find_parent(currentEdge.source,parent);
+    int destParent = find_parent(currentEdge.dest , parent);
+
+    if(sourceParent != destParent)
+      {
+        output[c] = currentEdge;
+        parent[sourceParent] = destParent;
+        c++;
+      }
+      i++;
+
+  }
+  for(int i=0;i<n-1;i++)
+  {
+    cout<<output[i].source<<" "<<output[i].dest <<" "<<output[i].weight<<endl;
+  }
 }
 int main()
 {
-ios_base:: sync_with_stdio(false);
-cin.tie(NULL);
-  int n,E;
-  cin>>n>>E;
+  ios_base:: sync_with_stdio(false);
+  cin.tie(NULL);
 
-  Edge *input = new Edge[E];
+  int n,E;  cin>>n>>E;
+
+  Edge* input = new Edge[E];
 
   for(int i=0;i<E;i++)
   {
-    int s,d,w;
-    cin>>s>>d>>w;
+    int s,d,w;  cin>>s>>d>>w;
+
     input[i].source = s;
     input[i].dest = d;
     input[i].weight = w;
+    
   }
 
-  Kruskals(input,n,E);
+  Krushkal(input,n,E);
+
+
+
+  
 }
