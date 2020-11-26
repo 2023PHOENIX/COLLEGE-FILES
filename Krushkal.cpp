@@ -20,7 +20,7 @@ bool S(Edge a,Edge b)
 
 int findParent(int v,int *parent)
 {
-  if(parent[v] = v)
+  if(parent[v] == v)
     return v;
   return findParent(parent[v],parent);
 }
