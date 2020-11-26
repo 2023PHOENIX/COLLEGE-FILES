@@ -15,7 +15,7 @@ class Edge
 
 bool S(Edge a,Edge b)
 {
-  return a.weight > b.weight;
+  return a.weight < b.weight;
 }
 
 int findParent(int v,int *parent)
